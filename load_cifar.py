@@ -3,7 +3,8 @@ from keras.datasets import cifar10
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Flatten, Conv2D, MaxPooling2D
 from pathlib import Path
-
+import pickle
+from mlflow.models.signature import infer_signature
 (x_train, y_train), (x_test, y_test)=cifar10.load_data()
 
 #normalization
@@ -55,3 +56,5 @@ f=Path("model_structure.json")
 f.write_text(model_structure)
 
 model.save_weights("model_weights.h5")
+with open('image_pickle.pkl', 'wb') as handle:
+    pickle.dump(model, handle)

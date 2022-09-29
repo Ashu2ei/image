@@ -21,3 +21,19 @@ This is the neural network model that is built.
 <br/>
 [Medium article](https://medium.com/@siddhantsukhatankar/hello-world-in-image-recognition-136eba581464)
 <br/>
+
+#################
+
+pip3 install -r requirements.txt
+
+export MLFLOW_TRACKING_URI="sqlite:///mlruns.db"
+
+python3 model_service.py
+
+mlflow models serve -m models:/SentimentAnalysis/latest -p 5000 --no-conda
+
+
+curl http://127.0.0.1:5000/invocations -H 'Content-Type: application/json' -d '{"instances":[ "It is a bad day"]}'
+                                            or
+###################
+

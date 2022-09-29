@@ -1,6 +1,8 @@
 from keras.models import model_from_json
 from pathlib import Path
-from keras.preprocessing import image
+#from keras.preprocessing import image 
+#from keras.utils import load_img
+from keras.utils import image_utils
 import numpy as np
 
 
@@ -21,7 +23,7 @@ class_labels=[
 #load json of model structure
 f=Path("model_structure.json")
 model_structure=f.read_text()
-
+	
 #recreate keras model from json
 model=model_from_json(model_structure)
 
@@ -29,10 +31,10 @@ model=model_from_json(model_structure)
 model.load_weights("model_weights.h5")
 
 #load image to test
-img=image.load_img("frog.jpg",target_size=(32,32))
+img=image_utils.load_img("truck.jpg",target_size=(32,32))
 
 #convert img to numpy array
-image_to_test=image.img_to_array(img)/255
+image_to_test=image_utils.img_to_array(img)/255
 
 #add dimension
 list_of_images=np.expand_dims(image_to_test,axis=0)
